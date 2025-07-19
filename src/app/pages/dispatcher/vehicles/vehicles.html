@@ -1,0 +1,40 @@
+<div class="container">
+  <h2 class="my-4">Car Management</h2>
+  <div class="col-12">
+    <button type="submit" (click)="addCar()" class="btn btn-success">Add Car</button>
+  </div>
+  <hr class="my-2">
+  <table class="table table-bordered">
+    <thead class="table-dark">
+      <tr>
+        <th>#</th>
+        <th>plate Number</th>
+        <th>model</th>
+        <th>color</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let car of cars; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ car.plateNumber }}</td>
+        <td>{{ car.model }}</td>
+        <td>{{ car.color }}</td>
+        <td>
+          <span class="badge"
+            [ngClass]="{
+              'bg-success': car.status === 'ACTIVE',
+              'bg-warning text-dark': car.status === 'ON_PROGRESS',
+              'bg-secondary': car.status === 'INACTIVE'
+            }">
+            {{ car.status }}
+          </span>
+        </td>
+        <td>
+          <button class="btn btn-sm btn-danger">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

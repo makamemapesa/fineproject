@@ -1,0 +1,49 @@
+<div class="p-4">
+    <h3>ADD/UPDATE DRIVER</h3>
+    <hr class="py-2">
+    <form [formGroup]="driverForm" class="row g-3">
+        <div class="col-md-4">
+        <input type="text" class="form-control" placeholder="First Name" formControlName="firstName" >
+        </div>
+        <div class="col-md-4">
+        <input type="text" class="form-control" placeholder="Middle Name" formControlName="middleName" >
+        </div>
+        <div class="col-md-4">
+        <input type="text" class="form-control" placeholder="Last Name" formControlName="lastName" >
+        </div>
+        <div class="col-md-6">
+        <input type="email" class="form-control" placeholder="Email" formControlName="email" >
+        </div>
+        <div class="col-md-6">
+        <input type="text" class="form-control" placeholder="Phone Number" formControlName="phoneNumber" >
+        </div>
+        <div class="col-md-6">
+        <input type="text" class="form-control" placeholder="License Number" formControlName="licenseNumber">
+        </div>
+        <div class="col-md-6">
+        <!-- <select class="form-select" formControlName="carId">
+            <option *ngFor="let car of cars" [value]="car.id">{{ car.plateNumber }}</option>
+        </select> -->
+        <mat-form-field appearance="outline">
+            <!-- <mat-label>Vehicle</mat-label> -->
+            <input type="text"
+                placeholder="Vehicle"
+                aria-label="Vehicle"
+                matInput
+                formControlName="carId"
+                [matAutocomplete]="auto">
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
+            @for (option of filteredOptions | async; track option) {
+                <mat-option [value]="option">{{option.plateNumber}}</mat-option>
+            }
+            </mat-autocomplete>
+        </mat-form-field>
+        </div>
+        <hr>
+        <div class="col-12 justify-content-between d-flex">
+            <button type="button" class="btn btn-danger" (click)="close()">Cancel</button>
+            <button type="submit" *ngIf="!data" (click)="addDriver()" class="btn btn-success" [disabled]="driverForm.invalid">Add Driver</button>
+            <button type="submit" *ngIf="data" (click)="updateDriver()" class="btn btn-success" [disabled]="driverForm.invalid">Update Driver</button>
+        </div>
+    </form>
+</div>

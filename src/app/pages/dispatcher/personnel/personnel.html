@@ -1,0 +1,44 @@
+
+<div class="container">
+  <h2 class="my-4">Driver Management</h2>
+  <div class="col-12">
+    <button type="submit" (click)="addDriver()" class="btn btn-success">Add Driver</button>
+  </div>
+  <hr class="my-2">
+  <table class="table table-bordered">
+    <thead class="table-dark">
+      <tr>
+        <th>#</th>
+        <th>Full Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>License</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let driver of drivers; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ driver.firstName }} {{ driver.middleName }} {{ driver.lastName }}</td>
+        <td>{{ driver.email }}</td>
+        <td>{{ driver.phoneNumber }}</td>
+        <td>{{ driver.licenseNumber }}</td>
+        <td>
+          <span class="badge"
+            [ngClass]="{
+              'bg-success': driver.status === 'ACTIVE',
+              'bg-warning text-dark': driver.status === 'ON_PROGRESS',
+              'bg-secondary': driver.status === 'INACTIVE'
+            }">
+            {{ driver.status }}
+          </span>
+        </td>
+        <td>
+          <button class="btn btn-sm btn-primary" (click)="updateDriver(driver)">Edit</button>
+          <button class="btn btn-sm btn-danger" (click)="deleteDriver(driver)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
