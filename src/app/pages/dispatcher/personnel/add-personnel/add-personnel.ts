@@ -17,7 +17,7 @@ import { MatInputModule } from '@angular/material/input';
     MatAutocompleteModule,
     MatFormFieldModule,
     MatInputModule,
-    MatLabel
+    
   ],
   templateUrl: './add-personnel.html',
   styleUrl: './add-personnel.css'

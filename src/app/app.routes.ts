@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { Dispatcher } from './pages/dispatcher/dispatcher';
-import { Emergencies } from './pages/dispatcher/emergencies/emergencies';
+import { EmergenciesComponent } from './pages/dispatcher/emergencies/emergencies';
 import { Overview } from './pages/dispatcher/overview/overview';
 import { PersonnelComponent } from './pages/dispatcher/personnel/personnel';
 import { Reports } from './pages/dispatcher/reports/reports';
@@ -16,7 +16,7 @@ export const routes: Routes = [
     component: Dispatcher,
     children: [
       { path: '', component: Overview },
-      { path: 'emergencies', component: Emergencies },
+      { path: 'emergencies', component: EmergenciesComponent },
       { path: 'vehicles', component: VehiclesComponent },
       { path: 'personnel', component: PersonnelComponent },
       { path: 'reports', component: Reports },

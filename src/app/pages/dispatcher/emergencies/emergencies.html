@@ -1,50 +1,44 @@
 
 <div class="container">
-  <h2 class="my-4">Reported Emergencies</h2>
-
-  <div class="mb-3">
-    <label class="me-2 fw-bold">Filter by Status:</label>
-    <button class="btn btn-sm me-2" [class.btn-primary]="filteredStatus === 'ALL'" (click)="setStatusFilter('ALL')">All</button>
-    <button class="btn btn-sm me-2" [class.btn-success]="filteredStatus === 'ACTIVE'" (click)="setStatusFilter('ACTIVE')">Active</button>
-    <button class="btn btn-sm me-2" [class.btn-warning]="filteredStatus === 'PENDING'" (click)="setStatusFilter('PENDING')">Pending</button>
-    <button class="btn btn-sm" [class.btn-secondary]="filteredStatus === 'COMPLETED'" (click)="setStatusFilter('COMPLETED')">Completed</button>
+  <h2 class="my-4">Emergency Management</h2>
+  <div class="col-12">
+    <!-- <button type="submit" (click)="addEmergency()" class="btn btn-success">Add Emergency</button> -->
   </div>
-
+  <hr class="my-2">
   <table class="table table-bordered">
     <thead class="table-dark">
       <tr>
-        <th>ID</th>
+        <th>#</th>
+        <th>Type</th>
         <th>Description</th>
+        <th>Location</th>
         <th>Status</th>
-        <th>Reported At</th>
         <th>Actions</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let emergency of filteredEmergencies">
-        <td>{{ emergency.id }}</td>
+      <tr *ngFor="let emergency of emergencies; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ emergency.type }}</td>
         <td>{{ emergency.description }}</td>
-        <td>{{ emergency.status }}</td>
-        <td>{{ emergency.reportedAt | date:'short' }}</td>
+        <td>{{ emergency.location }}</td>
+    
         <td>
-          <button class="btn btn-primary btn-sm" (click)="viewDetails(emergency)">More Details</button>
+          <span class="badge"
+            [ngClass]="{
+              'bg-success': emergency.status === 'ACTIVE',
+              'bg-warning text-dark': emergency.status === 'ON_PROGRESS',
+              'bg-secondary': emergency.status === 'INACTIVE'
+            }">
+            {{ emergency.status }}
+          </span>
+        </td>
+        <td>
+          <button class="btn btn-sm btn-primary" (click)="updateEmergency(emergency)">View more</button>
+          
+          <!-- <button class="btn btn-sm btn-danger" (click)="deleteEmergency(emergency)">Delete</button> -->
         </td>
       </tr>
     </tbody>
   </table>
-
-  <div *ngIf="selectedEmergency" class="card mt-4">
-    <div class="card-header d-flex justify-content-between">
-      <strong>Emergency Details</strong>
-      <button class="btn-close" (click)="closeDetails()"></button>
-    </div>
-    <div class="card-body">
-      <p><strong>Description:</strong> {{ selectedEmergency.description }}</p>
-      <p><strong>Status:</strong> {{ selectedEmergency.status }}</p>
-      <p><strong>Location:</strong> {{ selectedEmergency.locationDescription }} ({{ selectedEmergency.latitude }}, {{ selectedEmergency.longitude }})</p>
-      <p><strong>Reported At:</strong> {{ selectedEmergency.reportedAt | date:'short' }}</p>
-      <p><strong>Reporter:</strong> {{ selectedEmergency.reporter.name }} ({{ selectedEmergency.reporter.email }})</p>
-      <p><strong>Driver Assigned:</strong> {{ selectedEmergency.driver?.name || 'Not Assigned' }}</p>
-    </div>
-  </div>
 </div>
