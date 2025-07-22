@@ -52,6 +52,11 @@ export class Emergency {
     return this.http.put(`${this.url}/${id}`, body);
   }
 
+  updateEmergency(id: number, data: any): Observable<any> {
+  return this.http.put(`${this.url}/${id}`, data);
+}
+
+
   deleteEmergency(id: any): Observable<any> {
     return this.http.delete(`${this.url}/${id}`);
   }

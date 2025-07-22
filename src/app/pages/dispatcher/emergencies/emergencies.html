@@ -1,10 +1,7 @@
-
 <div class="container">
   <h2 class="my-4">Emergency Management</h2>
-  <div class="col-12">
-    <!-- <button type="submit" (click)="addEmergency()" class="btn btn-success">Add Emergency</button> -->
-  </div>
-  <hr class="my-2">
+
+  <hr class="my-2" />
   <table class="table table-bordered">
     <thead class="table-dark">
       <tr>
@@ -22,7 +19,6 @@
         <td>{{ emergency.type }}</td>
         <td>{{ emergency.description }}</td>
         <td>{{ emergency.location }}</td>
-    
         <td>
           <span class="badge"
             [ngClass]="{
@@ -34,9 +30,9 @@
           </span>
         </td>
         <td>
-          <button class="btn btn-sm btn-primary" (click)="updateEmergency(emergency)">View more</button>
-          
-          <!-- <button class="btn btn-sm btn-danger" (click)="deleteEmergency(emergency)">Delete</button> -->
+          <button class="btn btn-sm btn-primary" (click)="viewEmergency(emergency)">
+            View more
+          </button>
         </td>
       </tr>
     </tbody>
