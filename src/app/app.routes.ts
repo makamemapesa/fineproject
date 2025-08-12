@@ -6,6 +6,7 @@ import { PersonnelComponent } from './pages/dispatcher/personnel/personnel';
 import { Reports } from './pages/dispatcher/reports/reports';
 import { VehiclesComponent } from './pages/dispatcher/vehicles/vehicles';
 import { Landing } from './pages/landing/landing';
+import { LocationPage } from './pages/dispatcher/location/location';
 import { Login } from './pages/login/login';
 
 export const routes: Routes = [
@@ -20,6 +21,7 @@ export const routes: Routes = [
       { path: 'vehicles', component: VehiclesComponent },
       { path: 'personnel', component: PersonnelComponent },
       { path: 'reports', component: Reports },
+      { path: 'location', component: LocationPage },
       { path: '', redirectTo: 'overview', pathMatch: 'full' }
     ]
   },

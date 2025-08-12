@@ -1,0 +1,22 @@
+<div *ngIf="center">
+  <google-map
+    height="100vh"
+    width="100%"
+    [center]="center"
+    [zoom]="13"
+  >
+    <map-marker
+      [position]="reporterMarkerPosition"
+      [options]="markerOptions"
+      title="Reporter's Location"
+    ></map-marker>
+    <map-marker
+      [position]="driverMarkerPosition"
+      [options]="markerOptions"
+      title="Driver's Location"
+    ></map-marker>
+  </google-map>
+</div>
+<div *ngIf="!center">
+  <h2>Could not load map: Coordinates not provided in the URL.</h2>
+</div>

@@ -49,6 +49,7 @@ export class AddPersonnel {
       lastName: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
       phoneNumber: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required]),
       licenseNumber: new FormControl('', [Validators.required]),
       carId: new FormControl('', [Validators.required]),
       status: new FormControl('ACTIVE'),

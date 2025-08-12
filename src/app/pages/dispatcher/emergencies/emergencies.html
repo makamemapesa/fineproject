@@ -1,5 +1,10 @@
 <div class="container">
-  <h2 class="my-4">Emergency Management</h2>
+<div class="d-flex justify-content-between align-items-center">
+    <h2 class="my-4">Emergency Management</h2>
+    <div>
+      <a routerLink="/dispatcher/emergencies/add" class="btn btn-primary">Add Emergency</a>
+    </div>
+  </div>
 
   <hr class="my-2" />
   <table class="table table-bordered">
@@ -16,17 +21,17 @@
     <tbody>
       <tr *ngFor="let emergency of emergencies; let i = index">
         <td>{{ i + 1 }}</td>
-        <td>{{ emergency.type }}</td>
+        <td>fire</td>
         <td>{{ emergency.description }}</td>
-        <td>{{ emergency.location }}</td>
+        <ng-container *ngIf="emergency.status === 'REPORTED'; else existingLocation">
+          <td>{{ emergency.emergency.latitude }}, {{ emergency.emergency.longitude }}</td>
+        </ng-container>
+        <ng-template #existingLocation>
+          <td>{{ emergency.location }}</td>
+        </ng-template>
         <td>
-          <span class="badge"
-            [ngClass]="{
-              'bg-success': emergency.status === 'ACTIVE',
-              'bg-warning text-dark': emergency.status === 'ON_PROGRESS',
-              'bg-secondary': emergency.status === 'INACTIVE'
-            }">
-            {{ emergency.status }}
+          <span class="badge bg-danger">
+            new
           </span>
         </td>
         <td>

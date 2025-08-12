@@ -10,11 +10,49 @@
     <p><strong>Location:</strong> {{ emergencyDetails.location }}</p>
     <p><strong>Status:</strong> {{ emergencyDetails.status }}</p>
     <p><strong>Reported Time:</strong> {{ emergencyDetails.reportedAt }}</p>
-    <p><strong>Reporter Name:</strong> {{ emergencyDetails.reporterName }}</p>
-    <p><strong>Reporter Contact:</strong> {{ emergencyDetails.reporterContact }}</p>
+    <hr>
+
+    <p><strong>Reporter Name:</strong> 
+      {{ emergencyDetails.reporter?.firstName }} {{ emergencyDetails.reporter?.middleName }} {{ emergencyDetails.reporter?.lastName }}
+    </p>
+    <p><strong>Reporter Email:</strong> {{ emergencyDetails.reporter?.email }}</p>
+    <p><strong>Reporter Contact:</strong> {{ emergencyDetails.reporter?.phoneNumber }}</p>
+    <hr>
+
+    <!-- Driver assigned display -->
+    <p *ngIf="!editingAssignment">
+      <strong>Driver Assigned:</strong>
+      <ng-container *ngIf="emergencyDetails?.driver; else noDriver">
+        {{ emergencyDetails?.driver?.firstName }} {{ emergencyDetails?.driver?.middleName }} {{ emergencyDetails?.driver?.lastName }}
+        <button class="btn btn-warning btn-sm" (click)="startEditAssignment()">Update Assignment</button>
+      </ng-container>
+      <ng-template #noDriver>
+        Not Assigned
+        <button class="btn btn-primary btn-sm" (click)="startEditAssignment()">Assign Driver</button>
+      </ng-template>
+    </p>
+
+    <!-- Driver selection autocomplete when editing -->
+    <div *ngIf="editingAssignment">
+      <mat-form-field appearance="outline" class="w-100">
+        <input type="text"
+               placeholder="Select Driver"
+               aria-label="Driver"
+               matInput
+               [formControl]="driverControl"
+               [matAutocomplete]="driverAuto">
+        <mat-autocomplete autoActiveFirstOption #driverAuto="matAutocomplete" [displayWith]="displayDriverFn">
+          <mat-option *ngFor="let driver of filteredDrivers$ | async" [value]="driver">
+            {{ driver.firstName }} {{ driver.middleName }} {{ driver.lastName }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
   </div>
 
   <div class="modal-footer">
+    <button class="btn btn-info" (click)="viewOnMap()">View on Map</button>
+    <button *ngIf="editingAssignment" class="btn btn-primary" (click)="assignDriver()">Save Assignment</button>
     <button class="btn btn-secondary" (click)="close()">Close</button>
   </div>
 </div>
