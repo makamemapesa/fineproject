@@ -19,7 +19,15 @@ export class LocationPage implements OnInit {
   center!: google.maps.LatLngLiteral;
   reporterMarkerPosition!: google.maps.LatLngLiteral;
   driverMarkerPosition!: google.maps.LatLngLiteral;
-  markerOptions: google.maps.MarkerOptions = { draggable: false };
+  // markerOptions: google.maps.MarkerOptions = { draggable: false };
+  reporterMarkerOptions: google.maps.MarkerOptions = {
+    draggable: false,
+    icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+  };
+  driverMarkerOptions: google.maps.MarkerOptions = {
+    draggable: false,
+    icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+  };
 
   constructor(private route: ActivatedRoute) {}
 
